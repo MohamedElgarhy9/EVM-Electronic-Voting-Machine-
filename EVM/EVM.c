@@ -1,8 +1,7 @@
 /*
  * EVM.c
- *
  * Created: 12/30/2021 4:55:08 AM
- *  Author: Mohamed Maged 
+ * Author: Mohamed Maged 
  */ 
 
 
@@ -79,6 +78,7 @@ void updateCounter(unsigned char *candidateCounter, unsigned char row, unsigned 
 	}
 	_delay_ms(500);
 }
+// Reset part
 void set_LCD(void)
 {
 	LCD_vSend_String("A:0");
