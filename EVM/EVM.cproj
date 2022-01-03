@@ -82,6 +82,9 @@
     <Compile Include="EVM.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="EVM.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="LCD.c">
       <SubType>compile</SubType>
     </Compile>

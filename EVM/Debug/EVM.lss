@@ -3,29 +3,27 @@ EVM.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000c64  00000000  00000000  00000074  2**1
+  0 .text         00000a8e  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000010  00800060  00000c64  00000cd8  2**0
+  1 .data         00000010  00800060  00000a8e  00000b02  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .stab         000006cc  00000000  00000000  00000ce8  2**2
+  2 .stab         000006cc  00000000  00000000  00000b14  2**2
                   CONTENTS, READONLY, DEBUGGING
-  3 .stabstr      00000085  00000000  00000000  000013b4  2**0
+  3 .stabstr      00000085  00000000  00000000  000011e0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_aranges 00000100  00000000  00000000  00001440  2**3
+  4 .debug_aranges 00000100  00000000  00000000  00001268  2**3
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000dcb  00000000  00000000  00001540  2**0
+  5 .debug_info   00000d8f  00000000  00000000  00001368  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000410  00000000  00000000  0000230b  2**0
+  6 .debug_abbrev 00000437  00000000  00000000  000020f7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000007f5  00000000  00000000  0000271b  2**0
+  7 .debug_line   00000793  00000000  00000000  0000252e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000001cc  00000000  00000000  00002f10  2**2
+  8 .debug_frame  0000020c  00000000  00000000  00002cc4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000357  00000000  00000000  000030dc  2**0
+  9 .debug_str    0000037e  00000000  00000000  00002ed0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000091e  00000000  00000000  00003433  2**0
-                  CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000030  00000000  00000000  00003d51  2**0
+ 10 .debug_loc    00000847  00000000  00000000  0000324e  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -65,8 +63,8 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e4 e6       	ldi	r30, 0x64	; 100
-  68:	fc e0       	ldi	r31, 0x0C	; 12
+  66:	ee e8       	ldi	r30, 0x8E	; 142
+  68:	fa e0       	ldi	r31, 0x0A	; 10
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
@@ -87,8 +85,8 @@ Disassembly of section .text:
   80:	a0 37       	cpi	r26, 0x70	; 112
   82:	b1 07       	cpc	r27, r17
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 ad 03 	call	0x75a	; 0x75a <main>
-  8a:	0c 94 30 06 	jmp	0xc60	; 0xc60 <_exit>
+  86:	0e 94 18 04 	call	0x830	; 0x830 <main>
+  8a:	0c 94 45 05 	jmp	0xa8a	; 0xa8a <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -987,799 +985,475 @@ Disassembly of section .text:
  756:	62 bb       	out	0x12, r22	; 18
  758:	08 95       	ret
 
-0000075a <main>:
-{
-	unsigned char count_A = 0;
-	unsigned char count_B = 0;
-	unsigned char count_C = 0;
-	unsigned char count_D = 0;
-	LCD_vInit();
- 75a:	0e 94 a4 05 	call	0xb48	; 0xb48 <LCD_vInit>
-	BUTTON_vInit('A',1);
- 75e:	81 e4       	ldi	r24, 0x41	; 65
- 760:	61 e0       	ldi	r22, 0x01	; 1
- 762:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
-	BUTTON_vInit('A',2);
- 766:	81 e4       	ldi	r24, 0x41	; 65
- 768:	62 e0       	ldi	r22, 0x02	; 2
- 76a:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
-	BUTTON_vInit('A',3);
- 76e:	81 e4       	ldi	r24, 0x41	; 65
- 770:	63 e0       	ldi	r22, 0x03	; 3
- 772:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
-	BUTTON_vInit('A',4);
- 776:	81 e4       	ldi	r24, 0x41	; 65
- 778:	64 e0       	ldi	r22, 0x04	; 4
- 77a:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
-	BUTTON_vInit('A',5);
- 77e:	81 e4       	ldi	r24, 0x41	; 65
- 780:	65 e0       	ldi	r22, 0x05	; 5
- 782:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
-	LCD_vSend_String("A:0");
- 786:	80 e6       	ldi	r24, 0x60	; 96
- 788:	90 e0       	ldi	r25, 0x00	; 0
- 78a:	0e 94 f4 05 	call	0xbe8	; 0xbe8 <LCD_vSend_String>
-	LCD_vMoveCursor(1,8);
- 78e:	81 e0       	ldi	r24, 0x01	; 1
- 790:	68 e0       	ldi	r22, 0x08	; 8
- 792:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-	LCD_vSend_String("B:0");
- 796:	84 e6       	ldi	r24, 0x64	; 100
- 798:	90 e0       	ldi	r25, 0x00	; 0
- 79a:	0e 94 f4 05 	call	0xbe8	; 0xbe8 <LCD_vSend_String>
-	LCD_vMoveCursor(2,1);
- 79e:	82 e0       	ldi	r24, 0x02	; 2
- 7a0:	61 e0       	ldi	r22, 0x01	; 1
- 7a2:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-	LCD_vSend_String("C:0");
- 7a6:	88 e6       	ldi	r24, 0x68	; 104
- 7a8:	90 e0       	ldi	r25, 0x00	; 0
- 7aa:	0e 94 f4 05 	call	0xbe8	; 0xbe8 <LCD_vSend_String>
-	LCD_vMoveCursor(2,8);
- 7ae:	82 e0       	ldi	r24, 0x02	; 2
- 7b0:	68 e0       	ldi	r22, 0x08	; 8
- 7b2:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-	LCD_vSend_String("D:0");
- 7b6:	8c e6       	ldi	r24, 0x6C	; 108
- 7b8:	90 e0       	ldi	r25, 0x00	; 0
- 7ba:	0e 94 f4 05 	call	0xbe8	; 0xbe8 <LCD_vSend_String>
-int main(void)
-{
-	unsigned char count_A = 0;
-	unsigned char count_B = 0;
-	unsigned char count_C = 0;
-	unsigned char count_D = 0;
- 7be:	cc 24       	eor	r12, r12
-#include "util/delay.h"
-int main(void)
-{
-	unsigned char count_A = 0;
-	unsigned char count_B = 0;
-	unsigned char count_C = 0;
- 7c0:	ff 24       	eor	r15, r15
-#define F_CPU 8000000UL
-#include "util/delay.h"
-int main(void)
-{
-	unsigned char count_A = 0;
-	unsigned char count_B = 0;
- 7c2:	00 e0       	ldi	r16, 0x00	; 0
-#include "BUTTON.h"
-#define F_CPU 8000000UL
-#include "util/delay.h"
-int main(void)
-{
-	unsigned char count_A = 0;
- 7c4:	10 e0       	ldi	r17, 0x00	; 0
-				LCD_vSend_Char((count_A%10)+48);
-			}
-			//printing a number with three digits
-			else if(count_A<1000 && count_A>99)
-			{
-				LCD_vSend_Char((count_A/100)+48);
- 7c6:	0f 2e       	mov	r0, r31
- 7c8:	f4 e6       	ldi	r31, 0x64	; 100
- 7ca:	bf 2e       	mov	r11, r31
- 7cc:	f0 2d       	mov	r31, r0
-				LCD_vSend_Char(((count_A/10)%10)+48);
- 7ce:	ca e0       	ldi	r28, 0x0A	; 10
+0000075a <updateCounter>:
+			set_LCD();
+			_delay_ms(1000);
 		}
-		//Reset part
-		else if(BUTTON_u8Read('A',5) == 1)
-		{
-			//reset count_A, count_B, count_C and count_D
-			count_A=count_B=count_C=count_D=0;
- 7d0:	d0 e0       	ldi	r29, 0x00	; 0
-	LCD_vSend_String("C:0");
-	LCD_vMoveCursor(2,8);
-	LCD_vSend_String("D:0");
-	while(1)
+	}
+}
+void updateCounter(unsigned char *candidateCounter, unsigned char row, unsigned char col){
+ 75a:	1f 93       	push	r17
+ 75c:	cf 93       	push	r28
+ 75e:	df 93       	push	r29
+ 760:	ec 01       	movw	r28, r24
+ 762:	86 2f       	mov	r24, r22
+	// if the voter selects a candidate
+	(*candidateCounter) ++; //no of votes that owned to the candidate will increase by one
+ 764:	98 81       	ld	r25, Y
+ 766:	9f 5f       	subi	r25, 0xFF	; 255
+ 768:	98 83       	st	Y, r25
+	LCD_vMoveCursor(row,col);
+ 76a:	64 2f       	mov	r22, r20
+ 76c:	0e 94 18 05 	call	0xa30	; 0xa30 <LCD_vMoveCursor>
+	if(*candidateCounter<10)
+ 770:	88 81       	ld	r24, Y
+ 772:	8a 30       	cpi	r24, 0x0A	; 10
+ 774:	20 f4       	brcc	.+8      	; 0x77e <updateCounter+0x24>
 	{
-		if(BUTTON_u8Read('A',1) == 1)
- 7d2:	81 e4       	ldi	r24, 0x41	; 65
- 7d4:	61 e0       	ldi	r22, 0x01	; 1
- 7d6:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
- 7da:	81 30       	cpi	r24, 0x01	; 1
- 7dc:	09 f0       	breq	.+2      	; 0x7e0 <main+0x86>
- 7de:	41 c0       	rjmp	.+130    	; 0x862 <__stack+0x3>
-		{
-			// if the voter selects "A" candidate 
-			count_A++; //no of votes that owned to candidate "A" will increase by one 
- 7e0:	e1 2e       	mov	r14, r17
- 7e2:	e3 94       	inc	r14
-			LCD_vMoveCursor(1,3);
- 7e4:	63 e0       	ldi	r22, 0x03	; 3
- 7e6:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			if(count_A<10)
- 7ea:	89 e0       	ldi	r24, 0x09	; 9
- 7ec:	8e 15       	cp	r24, r14
- 7ee:	28 f0       	brcs	.+10     	; 0x7fa <main+0xa0>
-			{
-				LCD_vSend_Char(count_A+48);	
- 7f0:	81 2f       	mov	r24, r17
- 7f2:	8f 5c       	subi	r24, 0xCF	; 207
- 7f4:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 7f8:	29 c0       	rjmp	.+82     	; 0x84c <main+0xf2>
-			}
-			//printing a number with two digits 
-			else if(count_A<100 && count_A>9)
- 7fa:	19 50       	subi	r17, 0x09	; 9
- 7fc:	1a 35       	cpi	r17, 0x5A	; 90
- 7fe:	68 f4       	brcc	.+26     	; 0x81a <main+0xc0>
-			{
-				LCD_vSend_Char((count_A/10)+48);
- 800:	8e 2d       	mov	r24, r14
- 802:	6c 2f       	mov	r22, r28
- 804:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 808:	19 2f       	mov	r17, r25
- 80a:	80 5d       	subi	r24, 0xD0	; 208
- 80c:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_A%10)+48);
- 810:	81 2f       	mov	r24, r17
- 812:	80 5d       	subi	r24, 0xD0	; 208
- 814:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 818:	19 c0       	rjmp	.+50     	; 0x84c <main+0xf2>
-			}
-			//printing a number with three digits
-			else if(count_A<1000 && count_A>99)
- 81a:	93 e6       	ldi	r25, 0x63	; 99
- 81c:	9e 15       	cp	r25, r14
- 81e:	b0 f4       	brcc	.+44     	; 0x84c <main+0xf2>
-			{
-				LCD_vSend_Char((count_A/100)+48);
- 820:	8e 2d       	mov	r24, r14
- 822:	6b 2d       	mov	r22, r11
- 824:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 828:	80 5d       	subi	r24, 0xD0	; 208
- 82a:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char(((count_A/10)%10)+48);
- 82e:	8e 2d       	mov	r24, r14
- 830:	6c 2f       	mov	r22, r28
- 832:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 836:	19 2f       	mov	r17, r25
- 838:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 83c:	89 2f       	mov	r24, r25
- 83e:	80 5d       	subi	r24, 0xD0	; 208
- 840:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_A%10)+48);
- 844:	81 2f       	mov	r24, r17
- 846:	80 5d       	subi	r24, 0xD0	; 208
- 848:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
+		LCD_vSend_Char((*candidateCounter)+48);
+ 776:	80 5d       	subi	r24, 0xD0	; 208
+ 778:	0e 94 a1 04 	call	0x942	; 0x942 <LCD_vSend_Char>
+ 77c:	2f c0       	rjmp	.+94     	; 0x7dc <updateCounter+0x82>
+	}
+	//printing a number with two digits
+	else if((*candidateCounter)<100 && (*candidateCounter)>9)
+ 77e:	98 2f       	mov	r25, r24
+ 780:	9a 50       	subi	r25, 0x0A	; 10
+ 782:	9a 35       	cpi	r25, 0x5A	; 90
+ 784:	80 f4       	brcc	.+32     	; 0x7a6 <updateCounter+0x4c>
+	{
+		LCD_vSend_Char(((*candidateCounter)/10)+48);
+ 786:	1a e0       	ldi	r17, 0x0A	; 10
+ 788:	61 2f       	mov	r22, r17
+ 78a:	0e 94 39 05 	call	0xa72	; 0xa72 <__udivmodqi4>
+ 78e:	80 5d       	subi	r24, 0xD0	; 208
+ 790:	0e 94 a1 04 	call	0x942	; 0x942 <LCD_vSend_Char>
+		LCD_vSend_Char(((*candidateCounter)%10)+48);
+ 794:	88 81       	ld	r24, Y
+ 796:	61 2f       	mov	r22, r17
+ 798:	0e 94 39 05 	call	0xa72	; 0xa72 <__udivmodqi4>
+ 79c:	89 2f       	mov	r24, r25
+ 79e:	80 5d       	subi	r24, 0xD0	; 208
+ 7a0:	0e 94 a1 04 	call	0x942	; 0x942 <LCD_vSend_Char>
+ 7a4:	1b c0       	rjmp	.+54     	; 0x7dc <updateCounter+0x82>
+	}
+	//printing a number with three digits
+	else if((*candidateCounter)<1000 && (*candidateCounter)>99)
+ 7a6:	84 36       	cpi	r24, 0x64	; 100
+ 7a8:	c8 f0       	brcs	.+50     	; 0x7dc <updateCounter+0x82>
+	{
+		LCD_vSend_Char(((*candidateCounter)/100)+48);
+ 7aa:	64 e6       	ldi	r22, 0x64	; 100
+ 7ac:	0e 94 39 05 	call	0xa72	; 0xa72 <__udivmodqi4>
+ 7b0:	80 5d       	subi	r24, 0xD0	; 208
+ 7b2:	0e 94 a1 04 	call	0x942	; 0x942 <LCD_vSend_Char>
+		LCD_vSend_Char((((*candidateCounter)/10)%10)+48);
+ 7b6:	88 81       	ld	r24, Y
+ 7b8:	1a e0       	ldi	r17, 0x0A	; 10
+ 7ba:	61 2f       	mov	r22, r17
+ 7bc:	0e 94 39 05 	call	0xa72	; 0xa72 <__udivmodqi4>
+ 7c0:	0e 94 39 05 	call	0xa72	; 0xa72 <__udivmodqi4>
+ 7c4:	89 2f       	mov	r24, r25
+ 7c6:	80 5d       	subi	r24, 0xD0	; 208
+ 7c8:	0e 94 a1 04 	call	0x942	; 0x942 <LCD_vSend_Char>
+		LCD_vSend_Char(((*candidateCounter)%10)+48);
+ 7cc:	88 81       	ld	r24, Y
+ 7ce:	61 2f       	mov	r22, r17
+ 7d0:	0e 94 39 05 	call	0xa72	; 0xa72 <__udivmodqi4>
+ 7d4:	89 2f       	mov	r24, r25
+ 7d6:	80 5d       	subi	r24, 0xD0	; 208
+ 7d8:	0e 94 a1 04 	call	0x942	; 0x942 <LCD_vSend_Char>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 84c:	8f ef       	ldi	r24, 0xFF	; 255
- 84e:	94 e3       	ldi	r25, 0x34	; 52
- 850:	ac e0       	ldi	r26, 0x0C	; 12
- 852:	81 50       	subi	r24, 0x01	; 1
- 854:	90 40       	sbci	r25, 0x00	; 0
- 856:	a0 40       	sbci	r26, 0x00	; 0
- 858:	e1 f7       	brne	.-8      	; 0x852 <main+0xf8>
- 85a:	00 c0       	rjmp	.+0      	; 0x85c <main+0x102>
- 85c:	00 00       	nop
+ 7dc:	8f ef       	ldi	r24, 0xFF	; 255
+ 7de:	94 e3       	ldi	r25, 0x34	; 52
+ 7e0:	ac e0       	ldi	r26, 0x0C	; 12
+ 7e2:	81 50       	subi	r24, 0x01	; 1
+ 7e4:	90 40       	sbci	r25, 0x00	; 0
+ 7e6:	a0 40       	sbci	r26, 0x00	; 0
+ 7e8:	e1 f7       	brne	.-8      	; 0x7e2 <updateCounter+0x88>
+ 7ea:	00 c0       	rjmp	.+0      	; 0x7ec <updateCounter+0x92>
+ 7ec:	00 00       	nop
+	}
+	_delay_ms(500);
+}
+ 7ee:	df 91       	pop	r29
+ 7f0:	cf 91       	pop	r28
+ 7f2:	1f 91       	pop	r17
+ 7f4:	08 95       	ret
+
+000007f6 <set_LCD>:
+void set_LCD(void)
+{
+	LCD_vSend_String("A:0");
+ 7f6:	80 e6       	ldi	r24, 0x60	; 96
+ 7f8:	90 e0       	ldi	r25, 0x00	; 0
+ 7fa:	0e 94 09 05 	call	0xa12	; 0xa12 <LCD_vSend_String>
+	LCD_vMoveCursor(1,8);
+ 7fe:	81 e0       	ldi	r24, 0x01	; 1
+ 800:	68 e0       	ldi	r22, 0x08	; 8
+ 802:	0e 94 18 05 	call	0xa30	; 0xa30 <LCD_vMoveCursor>
+	LCD_vSend_String("B:0");
+ 806:	84 e6       	ldi	r24, 0x64	; 100
+ 808:	90 e0       	ldi	r25, 0x00	; 0
+ 80a:	0e 94 09 05 	call	0xa12	; 0xa12 <LCD_vSend_String>
+	LCD_vMoveCursor(2,1);
+ 80e:	82 e0       	ldi	r24, 0x02	; 2
+ 810:	61 e0       	ldi	r22, 0x01	; 1
+ 812:	0e 94 18 05 	call	0xa30	; 0xa30 <LCD_vMoveCursor>
+	LCD_vSend_String("C:0");
+ 816:	88 e6       	ldi	r24, 0x68	; 104
+ 818:	90 e0       	ldi	r25, 0x00	; 0
+ 81a:	0e 94 09 05 	call	0xa12	; 0xa12 <LCD_vSend_String>
+	LCD_vMoveCursor(2,8);
+ 81e:	82 e0       	ldi	r24, 0x02	; 2
+ 820:	68 e0       	ldi	r22, 0x08	; 8
+ 822:	0e 94 18 05 	call	0xa30	; 0xa30 <LCD_vMoveCursor>
+	LCD_vSend_String("D:0");
+ 826:	8c e6       	ldi	r24, 0x6C	; 108
+ 828:	90 e0       	ldi	r25, 0x00	; 0
+ 82a:	0e 94 09 05 	call	0xa12	; 0xa12 <LCD_vSend_String>
+}
+ 82e:	08 95       	ret
+
+00000830 <main>:
+
+
+#include "EVM.h"
+
+int main(void)
+{
+ 830:	cf 93       	push	r28
+ 832:	df 93       	push	r29
+ 834:	00 d0       	rcall	.+0      	; 0x836 <main+0x6>
+ 836:	00 d0       	rcall	.+0      	; 0x838 <main+0x8>
+ 838:	cd b7       	in	r28, 0x3d	; 61
+ 83a:	de b7       	in	r29, 0x3e	; 62
+	unsigned char count_A = 0;
+ 83c:	19 82       	std	Y+1, r1	; 0x01
+	unsigned char count_B = 0;
+ 83e:	1a 82       	std	Y+2, r1	; 0x02
+	unsigned char count_C = 0;
+ 840:	1b 82       	std	Y+3, r1	; 0x03
+	unsigned char count_D = 0;
+ 842:	1c 82       	std	Y+4, r1	; 0x04
+	unsigned char row, col;
+	LCD_vInit();
+ 844:	0e 94 b9 04 	call	0x972	; 0x972 <LCD_vInit>
+	BUTTON_vInit('A',1);
+ 848:	81 e4       	ldi	r24, 0x41	; 65
+ 84a:	61 e0       	ldi	r22, 0x01	; 1
+ 84c:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
+	BUTTON_vInit('A',2);
+ 850:	81 e4       	ldi	r24, 0x41	; 65
+ 852:	62 e0       	ldi	r22, 0x02	; 2
+ 854:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
+	BUTTON_vInit('A',3);
+ 858:	81 e4       	ldi	r24, 0x41	; 65
+ 85a:	63 e0       	ldi	r22, 0x03	; 3
+ 85c:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
+	BUTTON_vInit('A',4);
+ 860:	81 e4       	ldi	r24, 0x41	; 65
+ 862:	64 e0       	ldi	r22, 0x04	; 4
+ 864:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
+	BUTTON_vInit('A',5);
+ 868:	81 e4       	ldi	r24, 0x41	; 65
+ 86a:	65 e0       	ldi	r22, 0x05	; 5
+ 86c:	0e 94 49 00 	call	0x92	; 0x92 <BUTTON_vInit>
+	set_LCD();
+ 870:	0e 94 fb 03 	call	0x7f6	; 0x7f6 <set_LCD>
 	while(1)
 	{
 		if(BUTTON_u8Read('A',1) == 1)
+ 874:	81 e4       	ldi	r24, 0x41	; 65
+ 876:	61 e0       	ldi	r22, 0x01	; 1
+ 878:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
+ 87c:	81 30       	cpi	r24, 0x01	; 1
+ 87e:	39 f4       	brne	.+14     	; 0x88e <__stack+0x2f>
 		{
-			// if the voter selects "A" candidate 
-			count_A++; //no of votes that owned to candidate "A" will increase by one 
- 85e:	1e 2d       	mov	r17, r14
- 860:	b8 cf       	rjmp	.-144    	; 0x7d2 <main+0x78>
-				LCD_vSend_Char(((count_A/10)%10)+48);
-				LCD_vSend_Char((count_A%10)+48);
-			}
-			_delay_ms(500);
+			row=1, col=3;
+			updateCounter(&count_A, row, col);
+ 880:	ce 01       	movw	r24, r28
+ 882:	01 96       	adiw	r24, 0x01	; 1
+ 884:	61 e0       	ldi	r22, 0x01	; 1
+ 886:	43 e0       	ldi	r20, 0x03	; 3
+ 888:	0e 94 ad 03 	call	0x75a	; 0x75a <updateCounter>
+ 88c:	f3 cf       	rjmp	.-26     	; 0x874 <__stack+0x15>
 		}
 		else if(BUTTON_u8Read('A',2) == 1)
- 862:	81 e4       	ldi	r24, 0x41	; 65
- 864:	62 e0       	ldi	r22, 0x02	; 2
- 866:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
- 86a:	81 30       	cpi	r24, 0x01	; 1
- 86c:	09 f0       	breq	.+2      	; 0x870 <__stack+0x11>
- 86e:	41 c0       	rjmp	.+130    	; 0x8f2 <__stack+0x93>
+ 88e:	81 e4       	ldi	r24, 0x41	; 65
+ 890:	62 e0       	ldi	r22, 0x02	; 2
+ 892:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
+ 896:	81 30       	cpi	r24, 0x01	; 1
+ 898:	39 f4       	brne	.+14     	; 0x8a8 <__stack+0x49>
 		{
-			// if the voter selects "B" candidate 
-			count_B++;//no of votes that owned to candidate "B" will increase by one
- 870:	e0 2e       	mov	r14, r16
- 872:	e3 94       	inc	r14
-			LCD_vMoveCursor(1,10);
- 874:	6c 2f       	mov	r22, r28
- 876:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			if(count_B<10)
- 87a:	99 e0       	ldi	r25, 0x09	; 9
- 87c:	9e 15       	cp	r25, r14
- 87e:	28 f0       	brcs	.+10     	; 0x88a <__stack+0x2b>
-			{
-				LCD_vSend_Char(count_B+48);
- 880:	80 2f       	mov	r24, r16
- 882:	8f 5c       	subi	r24, 0xCF	; 207
- 884:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 888:	29 c0       	rjmp	.+82     	; 0x8dc <__stack+0x7d>
-			}
-			//printing a number with two digits
-			else if(count_B<100 && count_B>9)
- 88a:	09 50       	subi	r16, 0x09	; 9
- 88c:	0a 35       	cpi	r16, 0x5A	; 90
- 88e:	68 f4       	brcc	.+26     	; 0x8aa <__stack+0x4b>
-			{
-				LCD_vSend_Char((count_B/10)+48);
- 890:	8e 2d       	mov	r24, r14
- 892:	6c 2f       	mov	r22, r28
- 894:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 898:	09 2f       	mov	r16, r25
- 89a:	80 5d       	subi	r24, 0xD0	; 208
- 89c:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_B%10)+48);
- 8a0:	80 2f       	mov	r24, r16
- 8a2:	80 5d       	subi	r24, 0xD0	; 208
- 8a4:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 8a8:	19 c0       	rjmp	.+50     	; 0x8dc <__stack+0x7d>
-			}
-			//printing a number with three digits
-			else if(count_B<1000 && count_B>99)
- 8aa:	a3 e6       	ldi	r26, 0x63	; 99
- 8ac:	ae 15       	cp	r26, r14
- 8ae:	b0 f4       	brcc	.+44     	; 0x8dc <__stack+0x7d>
-			{
-				LCD_vSend_Char((count_B/100)+48);
- 8b0:	8e 2d       	mov	r24, r14
- 8b2:	6b 2d       	mov	r22, r11
- 8b4:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 8b8:	80 5d       	subi	r24, 0xD0	; 208
- 8ba:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char(((count_B/10)%10)+48);
- 8be:	8e 2d       	mov	r24, r14
- 8c0:	6c 2f       	mov	r22, r28
- 8c2:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 8c6:	09 2f       	mov	r16, r25
- 8c8:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 8cc:	89 2f       	mov	r24, r25
- 8ce:	80 5d       	subi	r24, 0xD0	; 208
- 8d0:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_B%10)+48);
- 8d4:	80 2f       	mov	r24, r16
- 8d6:	80 5d       	subi	r24, 0xD0	; 208
- 8d8:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 8dc:	8f ef       	ldi	r24, 0xFF	; 255
- 8de:	94 e3       	ldi	r25, 0x34	; 52
- 8e0:	ac e0       	ldi	r26, 0x0C	; 12
- 8e2:	81 50       	subi	r24, 0x01	; 1
- 8e4:	90 40       	sbci	r25, 0x00	; 0
- 8e6:	a0 40       	sbci	r26, 0x00	; 0
- 8e8:	e1 f7       	brne	.-8      	; 0x8e2 <__stack+0x83>
- 8ea:	00 c0       	rjmp	.+0      	; 0x8ec <__stack+0x8d>
- 8ec:	00 00       	nop
-			_delay_ms(500);
-		}
-		else if(BUTTON_u8Read('A',2) == 1)
-		{
-			// if the voter selects "B" candidate 
-			count_B++;//no of votes that owned to candidate "B" will increase by one
- 8ee:	0e 2d       	mov	r16, r14
- 8f0:	70 cf       	rjmp	.-288    	; 0x7d2 <main+0x78>
-				LCD_vSend_Char(((count_B/10)%10)+48);
-				LCD_vSend_Char((count_B%10)+48);
-			}
-			_delay_ms(500);
+			row=1, col=10;
+			updateCounter(&count_B, row, col);
+ 89a:	ce 01       	movw	r24, r28
+ 89c:	02 96       	adiw	r24, 0x02	; 2
+ 89e:	61 e0       	ldi	r22, 0x01	; 1
+ 8a0:	4a e0       	ldi	r20, 0x0A	; 10
+ 8a2:	0e 94 ad 03 	call	0x75a	; 0x75a <updateCounter>
+ 8a6:	e6 cf       	rjmp	.-52     	; 0x874 <__stack+0x15>
 		}
 		else if(BUTTON_u8Read('A',3) == 1)
- 8f2:	81 e4       	ldi	r24, 0x41	; 65
- 8f4:	63 e0       	ldi	r22, 0x03	; 3
- 8f6:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
- 8fa:	81 30       	cpi	r24, 0x01	; 1
- 8fc:	09 f0       	breq	.+2      	; 0x900 <__stack+0xa1>
- 8fe:	43 c0       	rjmp	.+134    	; 0x986 <__stack+0x127>
+ 8a8:	81 e4       	ldi	r24, 0x41	; 65
+ 8aa:	63 e0       	ldi	r22, 0x03	; 3
+ 8ac:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
+ 8b0:	81 30       	cpi	r24, 0x01	; 1
+ 8b2:	39 f4       	brne	.+14     	; 0x8c2 <__stack+0x63>
 		{
-			// if the voter selects "C" candidate 
-			count_C++;//no of votes that owned to candidate "C" will increase by one
- 900:	ef 2c       	mov	r14, r15
- 902:	e3 94       	inc	r14
-			LCD_vMoveCursor(2,3);
- 904:	82 e0       	ldi	r24, 0x02	; 2
- 906:	63 e0       	ldi	r22, 0x03	; 3
- 908:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			if(count_C<10)
- 90c:	99 e0       	ldi	r25, 0x09	; 9
- 90e:	9e 15       	cp	r25, r14
- 910:	28 f0       	brcs	.+10     	; 0x91c <__stack+0xbd>
-			{
-				LCD_vSend_Char(count_C+48);
- 912:	8f 2d       	mov	r24, r15
- 914:	8f 5c       	subi	r24, 0xCF	; 207
- 916:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 91a:	2a c0       	rjmp	.+84     	; 0x970 <__stack+0x111>
-			}
-			//printing a number with two digits
-			else if(count_C<100 && count_C>9)
- 91c:	8f 2d       	mov	r24, r15
- 91e:	89 50       	subi	r24, 0x09	; 9
- 920:	8a 35       	cpi	r24, 0x5A	; 90
- 922:	68 f4       	brcc	.+26     	; 0x93e <__stack+0xdf>
-			{
-				LCD_vSend_Char((count_C/10)+48);
- 924:	8e 2d       	mov	r24, r14
- 926:	6c 2f       	mov	r22, r28
- 928:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 92c:	f9 2e       	mov	r15, r25
- 92e:	80 5d       	subi	r24, 0xD0	; 208
- 930:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_C%10)+48);
- 934:	8f 2d       	mov	r24, r15
- 936:	80 5d       	subi	r24, 0xD0	; 208
- 938:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 93c:	19 c0       	rjmp	.+50     	; 0x970 <__stack+0x111>
-			}
-			//printing a number with three digits
-			else if(count_C<1000 && count_C>99)
- 93e:	a3 e6       	ldi	r26, 0x63	; 99
- 940:	ae 15       	cp	r26, r14
- 942:	b0 f4       	brcc	.+44     	; 0x970 <__stack+0x111>
-			{
-				LCD_vSend_Char((count_C/100)+48);
- 944:	8e 2d       	mov	r24, r14
- 946:	6b 2d       	mov	r22, r11
- 948:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 94c:	80 5d       	subi	r24, 0xD0	; 208
- 94e:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char(((count_C/10)%10)+48);
- 952:	8e 2d       	mov	r24, r14
- 954:	6c 2f       	mov	r22, r28
- 956:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 95a:	f9 2e       	mov	r15, r25
- 95c:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 960:	89 2f       	mov	r24, r25
- 962:	80 5d       	subi	r24, 0xD0	; 208
- 964:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_C%10)+48);
- 968:	8f 2d       	mov	r24, r15
- 96a:	80 5d       	subi	r24, 0xD0	; 208
- 96c:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 970:	8f ef       	ldi	r24, 0xFF	; 255
- 972:	94 e3       	ldi	r25, 0x34	; 52
- 974:	ac e0       	ldi	r26, 0x0C	; 12
- 976:	81 50       	subi	r24, 0x01	; 1
- 978:	90 40       	sbci	r25, 0x00	; 0
- 97a:	a0 40       	sbci	r26, 0x00	; 0
- 97c:	e1 f7       	brne	.-8      	; 0x976 <__stack+0x117>
- 97e:	00 c0       	rjmp	.+0      	; 0x980 <__stack+0x121>
- 980:	00 00       	nop
-			_delay_ms(500);
-		}
-		else if(BUTTON_u8Read('A',3) == 1)
-		{
-			// if the voter selects "C" candidate 
-			count_C++;//no of votes that owned to candidate "C" will increase by one
- 982:	fe 2c       	mov	r15, r14
- 984:	26 cf       	rjmp	.-436    	; 0x7d2 <main+0x78>
-				LCD_vSend_Char(((count_C/10)%10)+48);
-				LCD_vSend_Char((count_C%10)+48);
-			}
-			_delay_ms(500);
+			row=2, col=3;
+			updateCounter(&count_C, row, col);
+ 8b4:	ce 01       	movw	r24, r28
+ 8b6:	03 96       	adiw	r24, 0x03	; 3
+ 8b8:	62 e0       	ldi	r22, 0x02	; 2
+ 8ba:	43 e0       	ldi	r20, 0x03	; 3
+ 8bc:	0e 94 ad 03 	call	0x75a	; 0x75a <updateCounter>
+ 8c0:	d9 cf       	rjmp	.-78     	; 0x874 <__stack+0x15>
 		}
 		else if(BUTTON_u8Read('A',4) == 1)
- 986:	81 e4       	ldi	r24, 0x41	; 65
- 988:	64 e0       	ldi	r22, 0x04	; 4
- 98a:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
- 98e:	81 30       	cpi	r24, 0x01	; 1
- 990:	09 f0       	breq	.+2      	; 0x994 <__stack+0x135>
- 992:	43 c0       	rjmp	.+134    	; 0xa1a <__stack+0x1bb>
+ 8c2:	81 e4       	ldi	r24, 0x41	; 65
+ 8c4:	64 e0       	ldi	r22, 0x04	; 4
+ 8c6:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
+ 8ca:	81 30       	cpi	r24, 0x01	; 1
+ 8cc:	39 f4       	brne	.+14     	; 0x8dc <__stack+0x7d>
 		{
-			// if the voter selects "D" candidate 
-			count_D++;//no of votes that owned to candidate "D" will increase by one
- 994:	dc 2c       	mov	r13, r12
- 996:	d3 94       	inc	r13
-			LCD_vMoveCursor(2,10);
- 998:	82 e0       	ldi	r24, 0x02	; 2
- 99a:	6c 2f       	mov	r22, r28
- 99c:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			if(count_D<10)
- 9a0:	99 e0       	ldi	r25, 0x09	; 9
- 9a2:	9d 15       	cp	r25, r13
- 9a4:	28 f0       	brcs	.+10     	; 0x9b0 <__stack+0x151>
-			{
-				LCD_vSend_Char(count_D+48);
- 9a6:	8c 2d       	mov	r24, r12
- 9a8:	8f 5c       	subi	r24, 0xCF	; 207
- 9aa:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 9ae:	2a c0       	rjmp	.+84     	; 0xa04 <__stack+0x1a5>
-			}
-			//printing a number with two digits
-			else if(count_D<100 && count_D>9)
- 9b0:	8c 2d       	mov	r24, r12
- 9b2:	89 50       	subi	r24, 0x09	; 9
- 9b4:	8a 35       	cpi	r24, 0x5A	; 90
- 9b6:	68 f4       	brcc	.+26     	; 0x9d2 <__stack+0x173>
-			{
-				LCD_vSend_Char((count_D/10)+48);
- 9b8:	8d 2d       	mov	r24, r13
- 9ba:	6c 2f       	mov	r22, r28
- 9bc:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 9c0:	e9 2e       	mov	r14, r25
- 9c2:	80 5d       	subi	r24, 0xD0	; 208
- 9c4:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_D%10)+48);
- 9c8:	8e 2d       	mov	r24, r14
- 9ca:	80 5d       	subi	r24, 0xD0	; 208
- 9cc:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- 9d0:	19 c0       	rjmp	.+50     	; 0xa04 <__stack+0x1a5>
-			}
-			//printing a number with three digits
-			else if(count_D<1000 && count_D>99)
- 9d2:	a3 e6       	ldi	r26, 0x63	; 99
- 9d4:	ad 15       	cp	r26, r13
- 9d6:	b0 f4       	brcc	.+44     	; 0xa04 <__stack+0x1a5>
-			{
-				LCD_vSend_Char((count_D/100)+48);
- 9d8:	8d 2d       	mov	r24, r13
- 9da:	6b 2d       	mov	r22, r11
- 9dc:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 9e0:	80 5d       	subi	r24, 0xD0	; 208
- 9e2:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char(((count_D/10)%10)+48);
- 9e6:	8d 2d       	mov	r24, r13
- 9e8:	6c 2f       	mov	r22, r28
- 9ea:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 9ee:	e9 2e       	mov	r14, r25
- 9f0:	0e 94 24 06 	call	0xc48	; 0xc48 <__udivmodqi4>
- 9f4:	89 2f       	mov	r24, r25
- 9f6:	80 5d       	subi	r24, 0xD0	; 208
- 9f8:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-				LCD_vSend_Char((count_D%10)+48);
- 9fc:	8e 2d       	mov	r24, r14
- 9fe:	80 5d       	subi	r24, 0xD0	; 208
- a00:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- a04:	8f ef       	ldi	r24, 0xFF	; 255
- a06:	94 e3       	ldi	r25, 0x34	; 52
- a08:	ac e0       	ldi	r26, 0x0C	; 12
- a0a:	81 50       	subi	r24, 0x01	; 1
- a0c:	90 40       	sbci	r25, 0x00	; 0
- a0e:	a0 40       	sbci	r26, 0x00	; 0
- a10:	e1 f7       	brne	.-8      	; 0xa0a <__stack+0x1ab>
- a12:	00 c0       	rjmp	.+0      	; 0xa14 <__stack+0x1b5>
- a14:	00 00       	nop
-			_delay_ms(500);
-		}
-		else if(BUTTON_u8Read('A',4) == 1)
-		{
-			// if the voter selects "D" candidate 
-			count_D++;//no of votes that owned to candidate "D" will increase by one
- a16:	cd 2c       	mov	r12, r13
- a18:	dc ce       	rjmp	.-584    	; 0x7d2 <main+0x78>
-				LCD_vSend_Char((count_D%10)+48);
-			}
-			_delay_ms(500);
+			row=2, col=10;
+			updateCounter(&count_D, row, col);
+ 8ce:	ce 01       	movw	r24, r28
+ 8d0:	04 96       	adiw	r24, 0x04	; 4
+ 8d2:	62 e0       	ldi	r22, 0x02	; 2
+ 8d4:	4a e0       	ldi	r20, 0x0A	; 10
+ 8d6:	0e 94 ad 03 	call	0x75a	; 0x75a <updateCounter>
+ 8da:	cc cf       	rjmp	.-104    	; 0x874 <__stack+0x15>
 		}
 		//Reset part
 		else if(BUTTON_u8Read('A',5) == 1)
- a1a:	81 e4       	ldi	r24, 0x41	; 65
- a1c:	65 e0       	ldi	r22, 0x05	; 5
- a1e:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
- a22:	81 30       	cpi	r24, 0x01	; 1
- a24:	09 f0       	breq	.+2      	; 0xa28 <__stack+0x1c9>
- a26:	d5 ce       	rjmp	.-598    	; 0x7d2 <main+0x78>
+ 8dc:	81 e4       	ldi	r24, 0x41	; 65
+ 8de:	65 e0       	ldi	r22, 0x05	; 5
+ 8e0:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_u8Read>
+ 8e4:	81 30       	cpi	r24, 0x01	; 1
+ 8e6:	31 f6       	brne	.-116    	; 0x874 <__stack+0x15>
 		{
 			//reset count_A, count_B, count_C and count_D
 			count_A=count_B=count_C=count_D=0;
-			LCD_vMoveCursor(1,5);
- a28:	65 e0       	ldi	r22, 0x05	; 5
- a2a:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- a2e:	80 e2       	ldi	r24, 0x20	; 32
- a30:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			LCD_vMoveCursor(1,4);
- a34:	81 e0       	ldi	r24, 0x01	; 1
- a36:	64 e0       	ldi	r22, 0x04	; 4
- a38:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- a3c:	80 e2       	ldi	r24, 0x20	; 32
- a3e:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			//display zero on row one column three 
-			LCD_vMoveCursor(1,3);
- a42:	81 e0       	ldi	r24, 0x01	; 1
- a44:	63 e0       	ldi	r22, 0x03	; 3
- a46:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(count_A+48);
- a4a:	80 e3       	ldi	r24, 0x30	; 48
- a4c:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			LCD_vMoveCursor(1,12);
- a50:	81 e0       	ldi	r24, 0x01	; 1
- a52:	6c e0       	ldi	r22, 0x0C	; 12
- a54:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- a58:	80 e2       	ldi	r24, 0x20	; 32
- a5a:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			LCD_vMoveCursor(1,11);
- a5e:	81 e0       	ldi	r24, 0x01	; 1
- a60:	6b e0       	ldi	r22, 0x0B	; 11
- a62:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- a66:	80 e2       	ldi	r24, 0x20	; 32
- a68:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			//display zero on row one column ten
-			LCD_vMoveCursor(1,10);
- a6c:	81 e0       	ldi	r24, 0x01	; 1
- a6e:	6c 2f       	mov	r22, r28
- a70:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(count_B+48);
- a74:	80 e3       	ldi	r24, 0x30	; 48
- a76:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			LCD_vMoveCursor(2,5);
- a7a:	82 e0       	ldi	r24, 0x02	; 2
- a7c:	65 e0       	ldi	r22, 0x05	; 5
- a7e:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- a82:	80 e2       	ldi	r24, 0x20	; 32
- a84:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			LCD_vMoveCursor(2,4);
- a88:	82 e0       	ldi	r24, 0x02	; 2
- a8a:	64 e0       	ldi	r22, 0x04	; 4
- a8c:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- a90:	80 e2       	ldi	r24, 0x20	; 32
- a92:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			//display zero on row two column three
-			LCD_vMoveCursor(2,3);
- a96:	82 e0       	ldi	r24, 0x02	; 2
- a98:	63 e0       	ldi	r22, 0x03	; 3
- a9a:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(count_C+48);
- a9e:	80 e3       	ldi	r24, 0x30	; 48
- aa0:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			LCD_vMoveCursor(2,12);
- aa4:	82 e0       	ldi	r24, 0x02	; 2
- aa6:	6c e0       	ldi	r22, 0x0C	; 12
- aa8:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- aac:	80 e2       	ldi	r24, 0x20	; 32
- aae:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			LCD_vMoveCursor(2,11);
- ab2:	82 e0       	ldi	r24, 0x02	; 2
- ab4:	6b e0       	ldi	r22, 0x0B	; 11
- ab6:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(' ');
- aba:	80 e2       	ldi	r24, 0x20	; 32
- abc:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
-			//display zero on row two column ten
-			LCD_vMoveCursor(2,10);
- ac0:	82 e0       	ldi	r24, 0x02	; 2
- ac2:	6c 2f       	mov	r22, r28
- ac4:	0e 94 03 06 	call	0xc06	; 0xc06 <LCD_vMoveCursor>
-			LCD_vSend_Char(count_D+48);
- ac8:	80 e3       	ldi	r24, 0x30	; 48
- aca:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- ace:	8f ef       	ldi	r24, 0xFF	; 255
- ad0:	99 e6       	ldi	r25, 0x69	; 105
- ad2:	a8 e1       	ldi	r26, 0x18	; 24
- ad4:	81 50       	subi	r24, 0x01	; 1
- ad6:	90 40       	sbci	r25, 0x00	; 0
- ad8:	a0 40       	sbci	r26, 0x00	; 0
- ada:	e1 f7       	brne	.-8      	; 0xad4 <__stack+0x275>
- adc:	00 c0       	rjmp	.+0      	; 0xade <__stack+0x27f>
- ade:	00 00       	nop
-		}
-		//Reset part
-		else if(BUTTON_u8Read('A',5) == 1)
-		{
-			//reset count_A, count_B, count_C and count_D
-			count_A=count_B=count_C=count_D=0;
- ae0:	cd 2e       	mov	r12, r29
- ae2:	fd 2e       	mov	r15, r29
- ae4:	0d 2f       	mov	r16, r29
- ae6:	1d 2f       	mov	r17, r29
- ae8:	74 ce       	rjmp	.-792    	; 0x7d2 <main+0x78>
+ 8e8:	1c 82       	std	Y+4, r1	; 0x04
+ 8ea:	1b 82       	std	Y+3, r1	; 0x03
+ 8ec:	1a 82       	std	Y+2, r1	; 0x02
+ 8ee:	19 82       	std	Y+1, r1	; 0x01
+			LCD_vClearScreen();
+ 8f0:	0e 94 ff 04 	call	0x9fe	; 0x9fe <LCD_vClearScreen>
+			LCD_vMoveCursor(1,1);
+ 8f4:	81 e0       	ldi	r24, 0x01	; 1
+ 8f6:	61 e0       	ldi	r22, 0x01	; 1
+ 8f8:	0e 94 18 05 	call	0xa30	; 0xa30 <LCD_vMoveCursor>
+			set_LCD();
+ 8fc:	0e 94 fb 03 	call	0x7f6	; 0x7f6 <set_LCD>
+ 900:	8f ef       	ldi	r24, 0xFF	; 255
+ 902:	99 e6       	ldi	r25, 0x69	; 105
+ 904:	a8 e1       	ldi	r26, 0x18	; 24
+ 906:	81 50       	subi	r24, 0x01	; 1
+ 908:	90 40       	sbci	r25, 0x00	; 0
+ 90a:	a0 40       	sbci	r26, 0x00	; 0
+ 90c:	e1 f7       	brne	.-8      	; 0x906 <__stack+0xa7>
+ 90e:	00 c0       	rjmp	.+0      	; 0x910 <__stack+0xb1>
+ 910:	00 00       	nop
+ 912:	b0 cf       	rjmp	.-160    	; 0x874 <__stack+0x15>
 
-00000aea <LCD_vsend_Falling_Edge>:
- aea:	82 e4       	ldi	r24, 0x42	; 66
- aec:	60 e0       	ldi	r22, 0x00	; 0
- aee:	41 e0       	ldi	r20, 0x01	; 1
- af0:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
- af4:	8f e9       	ldi	r24, 0x9F	; 159
- af6:	9f e0       	ldi	r25, 0x0F	; 15
- af8:	01 97       	sbiw	r24, 0x01	; 1
- afa:	f1 f7       	brne	.-4      	; 0xaf8 <LCD_vsend_Falling_Edge+0xe>
- afc:	00 c0       	rjmp	.+0      	; 0xafe <LCD_vsend_Falling_Edge+0x14>
- afe:	00 00       	nop
- b00:	82 e4       	ldi	r24, 0x42	; 66
- b02:	60 e0       	ldi	r22, 0x00	; 0
- b04:	40 e0       	ldi	r20, 0x00	; 0
- b06:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
- b0a:	8f e9       	ldi	r24, 0x9F	; 159
- b0c:	9f e0       	ldi	r25, 0x0F	; 15
- b0e:	01 97       	sbiw	r24, 0x01	; 1
- b10:	f1 f7       	brne	.-4      	; 0xb0e <LCD_vsend_Falling_Edge+0x24>
- b12:	00 c0       	rjmp	.+0      	; 0xb14 <LCD_vsend_Falling_Edge+0x2a>
- b14:	00 00       	nop
- b16:	08 95       	ret
+00000914 <LCD_vsend_Falling_Edge>:
+ 914:	82 e4       	ldi	r24, 0x42	; 66
+ 916:	60 e0       	ldi	r22, 0x00	; 0
+ 918:	41 e0       	ldi	r20, 0x01	; 1
+ 91a:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
+ 91e:	8f e9       	ldi	r24, 0x9F	; 159
+ 920:	9f e0       	ldi	r25, 0x0F	; 15
+ 922:	01 97       	sbiw	r24, 0x01	; 1
+ 924:	f1 f7       	brne	.-4      	; 0x922 <LCD_vsend_Falling_Edge+0xe>
+ 926:	00 c0       	rjmp	.+0      	; 0x928 <LCD_vsend_Falling_Edge+0x14>
+ 928:	00 00       	nop
+ 92a:	82 e4       	ldi	r24, 0x42	; 66
+ 92c:	60 e0       	ldi	r22, 0x00	; 0
+ 92e:	40 e0       	ldi	r20, 0x00	; 0
+ 930:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
+ 934:	8f e9       	ldi	r24, 0x9F	; 159
+ 936:	9f e0       	ldi	r25, 0x0F	; 15
+ 938:	01 97       	sbiw	r24, 0x01	; 1
+ 93a:	f1 f7       	brne	.-4      	; 0x938 <LCD_vsend_Falling_Edge+0x24>
+ 93c:	00 c0       	rjmp	.+0      	; 0x93e <LCD_vsend_Falling_Edge+0x2a>
+ 93e:	00 00       	nop
+ 940:	08 95       	ret
 
-00000b18 <LCD_vSend_Char>:
- b18:	68 2f       	mov	r22, r24
- b1a:	84 e4       	ldi	r24, 0x44	; 68
- b1c:	0e 94 4e 02 	call	0x49c	; 0x49c <DIO_vwritePORT>
- b20:	82 e4       	ldi	r24, 0x42	; 66
- b22:	61 e0       	ldi	r22, 0x01	; 1
- b24:	41 e0       	ldi	r20, 0x01	; 1
- b26:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
- b2a:	0e 94 75 05 	call	0xaea	; 0xaea <LCD_vsend_Falling_Edge>
- b2e:	08 95       	ret
+00000942 <LCD_vSend_Char>:
+ 942:	68 2f       	mov	r22, r24
+ 944:	84 e4       	ldi	r24, 0x44	; 68
+ 946:	0e 94 4e 02 	call	0x49c	; 0x49c <DIO_vwritePORT>
+ 94a:	82 e4       	ldi	r24, 0x42	; 66
+ 94c:	61 e0       	ldi	r22, 0x01	; 1
+ 94e:	41 e0       	ldi	r20, 0x01	; 1
+ 950:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
+ 954:	0e 94 8a 04 	call	0x914	; 0x914 <LCD_vsend_Falling_Edge>
+ 958:	08 95       	ret
 
-00000b30 <LCD_vSend_Cmd>:
- b30:	68 2f       	mov	r22, r24
- b32:	84 e4       	ldi	r24, 0x44	; 68
- b34:	0e 94 4e 02 	call	0x49c	; 0x49c <DIO_vwritePORT>
- b38:	82 e4       	ldi	r24, 0x42	; 66
- b3a:	61 e0       	ldi	r22, 0x01	; 1
- b3c:	40 e0       	ldi	r20, 0x00	; 0
- b3e:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
- b42:	0e 94 75 05 	call	0xaea	; 0xaea <LCD_vsend_Falling_Edge>
- b46:	08 95       	ret
+0000095a <LCD_vSend_Cmd>:
+ 95a:	68 2f       	mov	r22, r24
+ 95c:	84 e4       	ldi	r24, 0x44	; 68
+ 95e:	0e 94 4e 02 	call	0x49c	; 0x49c <DIO_vwritePORT>
+ 962:	82 e4       	ldi	r24, 0x42	; 66
+ 964:	61 e0       	ldi	r22, 0x01	; 1
+ 966:	40 e0       	ldi	r20, 0x00	; 0
+ 968:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
+ 96c:	0e 94 8a 04 	call	0x914	; 0x914 <LCD_vsend_Falling_Edge>
+ 970:	08 95       	ret
 
-00000b48 <LCD_vInit>:
- b48:	8f ef       	ldi	r24, 0xFF	; 255
- b4a:	91 ee       	ldi	r25, 0xE1	; 225
- b4c:	a4 e0       	ldi	r26, 0x04	; 4
- b4e:	81 50       	subi	r24, 0x01	; 1
- b50:	90 40       	sbci	r25, 0x00	; 0
- b52:	a0 40       	sbci	r26, 0x00	; 0
- b54:	e1 f7       	brne	.-8      	; 0xb4e <LCD_vInit+0x6>
- b56:	00 c0       	rjmp	.+0      	; 0xb58 <LCD_vInit+0x10>
- b58:	00 00       	nop
- b5a:	84 e4       	ldi	r24, 0x44	; 68
- b5c:	6f ef       	ldi	r22, 0xFF	; 255
- b5e:	0e 94 2f 02 	call	0x45e	; 0x45e <DIO_vsetPORTDIR>
- b62:	82 e4       	ldi	r24, 0x42	; 66
- b64:	60 e0       	ldi	r22, 0x00	; 0
- b66:	41 e0       	ldi	r20, 0x01	; 1
- b68:	0e 94 58 00 	call	0xb0	; 0xb0 <DIO_vsetPINDIR>
- b6c:	82 e4       	ldi	r24, 0x42	; 66
- b6e:	61 e0       	ldi	r22, 0x01	; 1
- b70:	41 e0       	ldi	r20, 0x01	; 1
- b72:	0e 94 58 00 	call	0xb0	; 0xb0 <DIO_vsetPINDIR>
- b76:	82 e4       	ldi	r24, 0x42	; 66
- b78:	62 e0       	ldi	r22, 0x02	; 2
- b7a:	41 e0       	ldi	r20, 0x01	; 1
- b7c:	0e 94 58 00 	call	0xb0	; 0xb0 <DIO_vsetPINDIR>
- b80:	82 e4       	ldi	r24, 0x42	; 66
- b82:	62 e0       	ldi	r22, 0x02	; 2
- b84:	40 e0       	ldi	r20, 0x00	; 0
- b86:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
- b8a:	88 e3       	ldi	r24, 0x38	; 56
- b8c:	0e 94 98 05 	call	0xb30	; 0xb30 <LCD_vSend_Cmd>
- b90:	af ec       	ldi	r26, 0xCF	; 207
- b92:	b7 e0       	ldi	r27, 0x07	; 7
- b94:	11 97       	sbiw	r26, 0x01	; 1
- b96:	f1 f7       	brne	.-4      	; 0xb94 <LCD_vInit+0x4c>
- b98:	00 c0       	rjmp	.+0      	; 0xb9a <LCD_vInit+0x52>
- b9a:	00 00       	nop
- b9c:	8c e0       	ldi	r24, 0x0C	; 12
- b9e:	0e 94 98 05 	call	0xb30	; 0xb30 <LCD_vSend_Cmd>
- ba2:	8f ec       	ldi	r24, 0xCF	; 207
- ba4:	97 e0       	ldi	r25, 0x07	; 7
- ba6:	01 97       	sbiw	r24, 0x01	; 1
- ba8:	f1 f7       	brne	.-4      	; 0xba6 <LCD_vInit+0x5e>
- baa:	00 c0       	rjmp	.+0      	; 0xbac <LCD_vInit+0x64>
- bac:	00 00       	nop
- bae:	81 e0       	ldi	r24, 0x01	; 1
- bb0:	0e 94 98 05 	call	0xb30	; 0xb30 <LCD_vSend_Cmd>
- bb4:	af e1       	ldi	r26, 0x1F	; 31
- bb6:	be e4       	ldi	r27, 0x4E	; 78
- bb8:	11 97       	sbiw	r26, 0x01	; 1
- bba:	f1 f7       	brne	.-4      	; 0xbb8 <LCD_vInit+0x70>
- bbc:	00 c0       	rjmp	.+0      	; 0xbbe <LCD_vInit+0x76>
- bbe:	00 00       	nop
- bc0:	86 e0       	ldi	r24, 0x06	; 6
- bc2:	0e 94 98 05 	call	0xb30	; 0xb30 <LCD_vSend_Cmd>
- bc6:	8f ec       	ldi	r24, 0xCF	; 207
- bc8:	97 e0       	ldi	r25, 0x07	; 7
- bca:	01 97       	sbiw	r24, 0x01	; 1
- bcc:	f1 f7       	brne	.-4      	; 0xbca <LCD_vInit+0x82>
- bce:	00 c0       	rjmp	.+0      	; 0xbd0 <LCD_vInit+0x88>
- bd0:	00 00       	nop
- bd2:	08 95       	ret
+00000972 <LCD_vInit>:
+ 972:	8f ef       	ldi	r24, 0xFF	; 255
+ 974:	91 ee       	ldi	r25, 0xE1	; 225
+ 976:	a4 e0       	ldi	r26, 0x04	; 4
+ 978:	81 50       	subi	r24, 0x01	; 1
+ 97a:	90 40       	sbci	r25, 0x00	; 0
+ 97c:	a0 40       	sbci	r26, 0x00	; 0
+ 97e:	e1 f7       	brne	.-8      	; 0x978 <LCD_vInit+0x6>
+ 980:	00 c0       	rjmp	.+0      	; 0x982 <LCD_vInit+0x10>
+ 982:	00 00       	nop
+ 984:	84 e4       	ldi	r24, 0x44	; 68
+ 986:	6f ef       	ldi	r22, 0xFF	; 255
+ 988:	0e 94 2f 02 	call	0x45e	; 0x45e <DIO_vsetPORTDIR>
+ 98c:	82 e4       	ldi	r24, 0x42	; 66
+ 98e:	60 e0       	ldi	r22, 0x00	; 0
+ 990:	41 e0       	ldi	r20, 0x01	; 1
+ 992:	0e 94 58 00 	call	0xb0	; 0xb0 <DIO_vsetPINDIR>
+ 996:	82 e4       	ldi	r24, 0x42	; 66
+ 998:	61 e0       	ldi	r22, 0x01	; 1
+ 99a:	41 e0       	ldi	r20, 0x01	; 1
+ 99c:	0e 94 58 00 	call	0xb0	; 0xb0 <DIO_vsetPINDIR>
+ 9a0:	82 e4       	ldi	r24, 0x42	; 66
+ 9a2:	62 e0       	ldi	r22, 0x02	; 2
+ 9a4:	41 e0       	ldi	r20, 0x01	; 1
+ 9a6:	0e 94 58 00 	call	0xb0	; 0xb0 <DIO_vsetPINDIR>
+ 9aa:	82 e4       	ldi	r24, 0x42	; 66
+ 9ac:	62 e0       	ldi	r22, 0x02	; 2
+ 9ae:	40 e0       	ldi	r20, 0x00	; 0
+ 9b0:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <DIO_vwritePIN>
+ 9b4:	88 e3       	ldi	r24, 0x38	; 56
+ 9b6:	0e 94 ad 04 	call	0x95a	; 0x95a <LCD_vSend_Cmd>
+ 9ba:	af ec       	ldi	r26, 0xCF	; 207
+ 9bc:	b7 e0       	ldi	r27, 0x07	; 7
+ 9be:	11 97       	sbiw	r26, 0x01	; 1
+ 9c0:	f1 f7       	brne	.-4      	; 0x9be <LCD_vInit+0x4c>
+ 9c2:	00 c0       	rjmp	.+0      	; 0x9c4 <LCD_vInit+0x52>
+ 9c4:	00 00       	nop
+ 9c6:	8c e0       	ldi	r24, 0x0C	; 12
+ 9c8:	0e 94 ad 04 	call	0x95a	; 0x95a <LCD_vSend_Cmd>
+ 9cc:	8f ec       	ldi	r24, 0xCF	; 207
+ 9ce:	97 e0       	ldi	r25, 0x07	; 7
+ 9d0:	01 97       	sbiw	r24, 0x01	; 1
+ 9d2:	f1 f7       	brne	.-4      	; 0x9d0 <LCD_vInit+0x5e>
+ 9d4:	00 c0       	rjmp	.+0      	; 0x9d6 <LCD_vInit+0x64>
+ 9d6:	00 00       	nop
+ 9d8:	81 e0       	ldi	r24, 0x01	; 1
+ 9da:	0e 94 ad 04 	call	0x95a	; 0x95a <LCD_vSend_Cmd>
+ 9de:	af e1       	ldi	r26, 0x1F	; 31
+ 9e0:	be e4       	ldi	r27, 0x4E	; 78
+ 9e2:	11 97       	sbiw	r26, 0x01	; 1
+ 9e4:	f1 f7       	brne	.-4      	; 0x9e2 <LCD_vInit+0x70>
+ 9e6:	00 c0       	rjmp	.+0      	; 0x9e8 <LCD_vInit+0x76>
+ 9e8:	00 00       	nop
+ 9ea:	86 e0       	ldi	r24, 0x06	; 6
+ 9ec:	0e 94 ad 04 	call	0x95a	; 0x95a <LCD_vSend_Cmd>
+ 9f0:	8f ec       	ldi	r24, 0xCF	; 207
+ 9f2:	97 e0       	ldi	r25, 0x07	; 7
+ 9f4:	01 97       	sbiw	r24, 0x01	; 1
+ 9f6:	f1 f7       	brne	.-4      	; 0x9f4 <LCD_vInit+0x82>
+ 9f8:	00 c0       	rjmp	.+0      	; 0x9fa <LCD_vInit+0x88>
+ 9fa:	00 00       	nop
+ 9fc:	08 95       	ret
 
-00000bd4 <LCD_vClearScreen>:
- bd4:	81 e0       	ldi	r24, 0x01	; 1
- bd6:	0e 94 98 05 	call	0xb30	; 0xb30 <LCD_vSend_Cmd>
- bda:	8f e1       	ldi	r24, 0x1F	; 31
- bdc:	9e e4       	ldi	r25, 0x4E	; 78
- bde:	01 97       	sbiw	r24, 0x01	; 1
- be0:	f1 f7       	brne	.-4      	; 0xbde <LCD_vClearScreen+0xa>
- be2:	00 c0       	rjmp	.+0      	; 0xbe4 <LCD_vClearScreen+0x10>
- be4:	00 00       	nop
- be6:	08 95       	ret
+000009fe <LCD_vClearScreen>:
+ 9fe:	81 e0       	ldi	r24, 0x01	; 1
+ a00:	0e 94 ad 04 	call	0x95a	; 0x95a <LCD_vSend_Cmd>
+ a04:	8f e1       	ldi	r24, 0x1F	; 31
+ a06:	9e e4       	ldi	r25, 0x4E	; 78
+ a08:	01 97       	sbiw	r24, 0x01	; 1
+ a0a:	f1 f7       	brne	.-4      	; 0xa08 <LCD_vClearScreen+0xa>
+ a0c:	00 c0       	rjmp	.+0      	; 0xa0e <LCD_vClearScreen+0x10>
+ a0e:	00 00       	nop
+ a10:	08 95       	ret
 
-00000be8 <LCD_vSend_String>:
- be8:	cf 93       	push	r28
- bea:	df 93       	push	r29
- bec:	ec 01       	movw	r28, r24
- bee:	88 81       	ld	r24, Y
- bf0:	88 23       	and	r24, r24
- bf2:	31 f0       	breq	.+12     	; 0xc00 <LCD_vSend_String+0x18>
- bf4:	21 96       	adiw	r28, 0x01	; 1
- bf6:	0e 94 8c 05 	call	0xb18	; 0xb18 <LCD_vSend_Char>
- bfa:	89 91       	ld	r24, Y+
- bfc:	88 23       	and	r24, r24
- bfe:	d9 f7       	brne	.-10     	; 0xbf6 <LCD_vSend_String+0xe>
- c00:	df 91       	pop	r29
- c02:	cf 91       	pop	r28
- c04:	08 95       	ret
+00000a12 <LCD_vSend_String>:
+ a12:	cf 93       	push	r28
+ a14:	df 93       	push	r29
+ a16:	ec 01       	movw	r28, r24
+ a18:	88 81       	ld	r24, Y
+ a1a:	88 23       	and	r24, r24
+ a1c:	31 f0       	breq	.+12     	; 0xa2a <LCD_vSend_String+0x18>
+ a1e:	21 96       	adiw	r28, 0x01	; 1
+ a20:	0e 94 a1 04 	call	0x942	; 0x942 <LCD_vSend_Char>
+ a24:	89 91       	ld	r24, Y+
+ a26:	88 23       	and	r24, r24
+ a28:	d9 f7       	brne	.-10     	; 0xa20 <LCD_vSend_String+0xe>
+ a2a:	df 91       	pop	r29
+ a2c:	cf 91       	pop	r28
+ a2e:	08 95       	ret
 
-00000c06 <LCD_vMoveCursor>:
- c06:	28 2f       	mov	r18, r24
- c08:	21 50       	subi	r18, 0x01	; 1
- c0a:	22 30       	cpi	r18, 0x02	; 2
- c0c:	70 f4       	brcc	.+28     	; 0xc2a <LCD_vMoveCursor+0x24>
- c0e:	61 31       	cpi	r22, 0x11	; 17
- c10:	70 f4       	brcc	.+28     	; 0xc2e <LCD_vMoveCursor+0x28>
- c12:	66 23       	and	r22, r22
- c14:	71 f0       	breq	.+28     	; 0xc32 <LCD_vMoveCursor+0x2c>
- c16:	81 30       	cpi	r24, 0x01	; 1
- c18:	19 f4       	brne	.+6      	; 0xc20 <LCD_vMoveCursor+0x1a>
- c1a:	96 2f       	mov	r25, r22
- c1c:	91 58       	subi	r25, 0x81	; 129
- c1e:	0a c0       	rjmp	.+20     	; 0xc34 <LCD_vMoveCursor+0x2e>
- c20:	82 30       	cpi	r24, 0x02	; 2
- c22:	41 f4       	brne	.+16     	; 0xc34 <LCD_vMoveCursor+0x2e>
- c24:	96 2f       	mov	r25, r22
- c26:	91 54       	subi	r25, 0x41	; 65
- c28:	05 c0       	rjmp	.+10     	; 0xc34 <LCD_vMoveCursor+0x2e>
- c2a:	90 e8       	ldi	r25, 0x80	; 128
- c2c:	03 c0       	rjmp	.+6      	; 0xc34 <LCD_vMoveCursor+0x2e>
- c2e:	90 e8       	ldi	r25, 0x80	; 128
- c30:	01 c0       	rjmp	.+2      	; 0xc34 <LCD_vMoveCursor+0x2e>
- c32:	90 e8       	ldi	r25, 0x80	; 128
- c34:	89 2f       	mov	r24, r25
- c36:	0e 94 98 05 	call	0xb30	; 0xb30 <LCD_vSend_Cmd>
- c3a:	8f ec       	ldi	r24, 0xCF	; 207
- c3c:	97 e0       	ldi	r25, 0x07	; 7
- c3e:	01 97       	sbiw	r24, 0x01	; 1
- c40:	f1 f7       	brne	.-4      	; 0xc3e <LCD_vMoveCursor+0x38>
- c42:	00 c0       	rjmp	.+0      	; 0xc44 <LCD_vMoveCursor+0x3e>
- c44:	00 00       	nop
- c46:	08 95       	ret
+00000a30 <LCD_vMoveCursor>:
+ a30:	28 2f       	mov	r18, r24
+ a32:	21 50       	subi	r18, 0x01	; 1
+ a34:	22 30       	cpi	r18, 0x02	; 2
+ a36:	70 f4       	brcc	.+28     	; 0xa54 <LCD_vMoveCursor+0x24>
+ a38:	61 31       	cpi	r22, 0x11	; 17
+ a3a:	70 f4       	brcc	.+28     	; 0xa58 <LCD_vMoveCursor+0x28>
+ a3c:	66 23       	and	r22, r22
+ a3e:	71 f0       	breq	.+28     	; 0xa5c <LCD_vMoveCursor+0x2c>
+ a40:	81 30       	cpi	r24, 0x01	; 1
+ a42:	19 f4       	brne	.+6      	; 0xa4a <LCD_vMoveCursor+0x1a>
+ a44:	96 2f       	mov	r25, r22
+ a46:	91 58       	subi	r25, 0x81	; 129
+ a48:	0a c0       	rjmp	.+20     	; 0xa5e <LCD_vMoveCursor+0x2e>
+ a4a:	82 30       	cpi	r24, 0x02	; 2
+ a4c:	41 f4       	brne	.+16     	; 0xa5e <LCD_vMoveCursor+0x2e>
+ a4e:	96 2f       	mov	r25, r22
+ a50:	91 54       	subi	r25, 0x41	; 65
+ a52:	05 c0       	rjmp	.+10     	; 0xa5e <LCD_vMoveCursor+0x2e>
+ a54:	90 e8       	ldi	r25, 0x80	; 128
+ a56:	03 c0       	rjmp	.+6      	; 0xa5e <LCD_vMoveCursor+0x2e>
+ a58:	90 e8       	ldi	r25, 0x80	; 128
+ a5a:	01 c0       	rjmp	.+2      	; 0xa5e <LCD_vMoveCursor+0x2e>
+ a5c:	90 e8       	ldi	r25, 0x80	; 128
+ a5e:	89 2f       	mov	r24, r25
+ a60:	0e 94 ad 04 	call	0x95a	; 0x95a <LCD_vSend_Cmd>
+ a64:	8f ec       	ldi	r24, 0xCF	; 207
+ a66:	97 e0       	ldi	r25, 0x07	; 7
+ a68:	01 97       	sbiw	r24, 0x01	; 1
+ a6a:	f1 f7       	brne	.-4      	; 0xa68 <LCD_vMoveCursor+0x38>
+ a6c:	00 c0       	rjmp	.+0      	; 0xa6e <LCD_vMoveCursor+0x3e>
+ a6e:	00 00       	nop
+ a70:	08 95       	ret
 
-00000c48 <__udivmodqi4>:
- c48:	99 1b       	sub	r25, r25
- c4a:	79 e0       	ldi	r23, 0x09	; 9
- c4c:	04 c0       	rjmp	.+8      	; 0xc56 <__udivmodqi4_ep>
+00000a72 <__udivmodqi4>:
+ a72:	99 1b       	sub	r25, r25
+ a74:	79 e0       	ldi	r23, 0x09	; 9
+ a76:	04 c0       	rjmp	.+8      	; 0xa80 <__udivmodqi4_ep>
 
-00000c4e <__udivmodqi4_loop>:
- c4e:	99 1f       	adc	r25, r25
- c50:	96 17       	cp	r25, r22
- c52:	08 f0       	brcs	.+2      	; 0xc56 <__udivmodqi4_ep>
- c54:	96 1b       	sub	r25, r22
+00000a78 <__udivmodqi4_loop>:
+ a78:	99 1f       	adc	r25, r25
+ a7a:	96 17       	cp	r25, r22
+ a7c:	08 f0       	brcs	.+2      	; 0xa80 <__udivmodqi4_ep>
+ a7e:	96 1b       	sub	r25, r22
 
-00000c56 <__udivmodqi4_ep>:
- c56:	88 1f       	adc	r24, r24
- c58:	7a 95       	dec	r23
- c5a:	c9 f7       	brne	.-14     	; 0xc4e <__udivmodqi4_loop>
- c5c:	80 95       	com	r24
- c5e:	08 95       	ret
+00000a80 <__udivmodqi4_ep>:
+ a80:	88 1f       	adc	r24, r24
+ a82:	7a 95       	dec	r23
+ a84:	c9 f7       	brne	.-14     	; 0xa78 <__udivmodqi4_loop>
+ a86:	80 95       	com	r24
+ a88:	08 95       	ret
 
-00000c60 <_exit>:
- c60:	f8 94       	cli
+00000a8a <_exit>:
+ a8a:	f8 94       	cli
 
-00000c62 <__stop_program>:
- c62:	ff cf       	rjmp	.-2      	; 0xc62 <__stop_program>
+00000a8c <__stop_program>:
+ a8c:	ff cf       	rjmp	.-2      	; 0xa8c <__stop_program>
