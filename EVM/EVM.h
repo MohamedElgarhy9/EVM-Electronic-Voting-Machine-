@@ -14,7 +14,7 @@
 #include "BUTTON.h"
 #define F_CPU 8000000UL
 #include "util/delay.h"
-void set_LCD(void);
 void updateCounter(unsigned char *candidateCounter, unsigned char row, unsigned char col);
+void set_LCD(void);
 
 #endif /* EVM_H_ */

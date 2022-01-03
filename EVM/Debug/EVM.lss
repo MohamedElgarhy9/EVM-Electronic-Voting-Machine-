@@ -1087,6 +1087,7 @@ void updateCounter(unsigned char *candidateCounter, unsigned char row, unsigned 
  7f4:	08 95       	ret
 
 000007f6 <set_LCD>:
+// Reset part
 void set_LCD(void)
 {
 	LCD_vSend_String("A:0");
