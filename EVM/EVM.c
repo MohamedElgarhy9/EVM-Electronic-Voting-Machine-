@@ -128,15 +128,37 @@ int main(void)
 			}
 			_delay_ms(500);
 		}
+		//Reset part
 		else if(BUTTON_u8Read('A',5) == 1)
 		{
-			count_A=count_B=count_C=count_D = 0;
+			//reset count_A, count_B, count_C and count_D
+			count_A=count_B=count_C=count_D=0;
+			LCD_vMoveCursor(1,5);
+			LCD_vSend_Char(' ');
+			LCD_vMoveCursor(1,4);
+			LCD_vSend_Char(' ');
+			//display zero on row one column three 
 			LCD_vMoveCursor(1,3);
 			LCD_vSend_Char(count_A+48);
+			LCD_vMoveCursor(1,12);
+			LCD_vSend_Char(' ');
+			LCD_vMoveCursor(1,11);
+			LCD_vSend_Char(' ');
+			//display zero on row one column ten
 			LCD_vMoveCursor(1,10);
 			LCD_vSend_Char(count_B+48);
+			LCD_vMoveCursor(2,5);
+			LCD_vSend_Char(' ');
+			LCD_vMoveCursor(2,4);
+			LCD_vSend_Char(' ');
+			//display zero on row two column three
 			LCD_vMoveCursor(2,3);
 			LCD_vSend_Char(count_C+48);
+			LCD_vMoveCursor(2,12);
+			LCD_vSend_Char(' ');
+			LCD_vMoveCursor(2,11);
+			LCD_vSend_Char(' ');
+			//display zero on row two column ten
 			LCD_vMoveCursor(2,10);
 			LCD_vSend_Char(count_D+48);
 			_delay_ms(1000);
